@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MainPage</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+      button {
+        width: 10em;
+      }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-light bg-primary">
+  <div class="container-fluid">
+    <span class=" mb-0 h1"><a href="MainPage.html" class="navbar-brand">Navbar</a></span>
+  </div>
+</nav>
+
+  <div class="d-grid gap-2 col-8 mx-auto">
+    <div class="form-group">
+      <h2>Create Lamp</h2>
+      <label for="value">Name</label>
+      <input
+              id="value"
+              type="text"
+              name="name"
+              style="margin-left: 14px"
+      />
+    </div>
+    <div class="form-group">
+      <label for="value2">Country</label>
+      <input
+              id="value2"
+              type="text"
+              name="country"
+      />
+    </div>
+    <button
+            id="button1"
+            type="button"
+            class="btn btn-primary btn-lg"
+    >Create
+    </button>
+
+    <ul id="main">
+
+    </ul>
+
+  </div>
+
+</body>
+
+<script>
+  $("#button1").click(function () {
+      let name = $("#value").val()
+      let country = $("#value2").val()
+      let data = null
+      // fetch("http://localhost:9090/api/lamp/getAll", {
+      //     method:"POST",
+      //     mode:"cors",
+      //     headers:{
+      //         'Content-Type':'application/json'
+      //     },
+      //     body:JSON.stringify({
+      //         name:name,
+      //         country:country
+      //     })
+      // })
+      //     .then(async response => await response.json()).then(json => data = json)
+      //     .catch(error => console.error(error))
+      //     .finally(() => {
+      //         console.log("Data received 3 --> ", data);
+      //     })
+
+    // $.get("http://localhost:9090/api/lamp/getAll", function (data) {
+    //   for (let item of data) {
+    //     console.log(item.name)
+    //   }
+    // })
+      let req = {
+          name:name,
+          country:country
+      }
+      $.ajax({
+          method:"POST",
+          type:"POST",
+          url:"http://localhost:9090/api/lamp/create",
+          contentType:"application/json",
+          headers: {
+              'Accept': 'application/json'
+          },
+          data:JSON.stringify(req),
+          dataType: 'json'
+      })
+    //   $.post("http://localhost:9090/api/lamp/create",JSON.stringify(req))
+    //   .before()
+  })
+</script>
+</html>
